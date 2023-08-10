@@ -3,13 +3,13 @@ import Hero from './components/home/hero'
 import { DATABASE_ID, TOKEN } from './config';
 import { use } from 'react';
 export default function Home() {
-  const a = use(fetchData())
-  console.log(a);
+  // const a = use(fetchData())
+  // console.log(a);
 
   return (
     <>
       <section className="flex min-h-screen flex-col items-center justify-center text-gray-600 body-font">
-        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center bg-primary ">
           <Hero />
         </div>
       </section>
