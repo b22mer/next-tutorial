@@ -1,34 +1,131 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# next-portfolio 연습
 
-## Getting Started
+### 학습 및 적용 파트
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- Next.js 13 환경설정
+    - next Image 오류 수정 (width, height)
+- tailwindCSS 환경설정
+    - @apply 오류수정 (공백 및 class 설정 문제)
+    - autoprefixer 오류수정
+    - theme attribute 오류수정
+
+```jsx
+module.exports = {
+  plugins: {
+    tailwindcss: { config: "./tailwind.config.js" },
+    autoprefixer: {},
+  },
+};
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```jsx
+module.exports = {
+  darkMode: "class",
+  mode: "jit",
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  theme: {
+    extend: {},
+  },
+  plugins:  [
+  
+  ],
+};
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```jsx
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+.bg-primary {
+    @apply bg-white dark:bg-slate-800
+}
 
-## Learn More
+.btn-project {
+    @apply inline-flex text-white dark:text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg
+}
 
-To learn more about Next.js, take a look at the following resources:
+.project-card {
+    @apply flex flex-col m-3 rounded-xl w-full transition duration-300 transform border border-gray-300 hover:scale-105 hover:shadow-lg dark:border-gray-200/50 dark:hover:shadow-gray-400/40 hover:text-blue-600
+}
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply text-slate-900 dark:text-white
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+footer {
+    @apply text-gray-600 dark:text-white bg-gray-100 dark:bg-slate-600/20
+}
 
-## Deploy on Vercel
+a {
+    @apply text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-50
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+p {
+    @apply text-slate-500 dark:text-slate-400
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- next-theme를 사용한 dark모드 적용
+    - provider 범위 설정 문제수정
+- Lottie Animation 적용
+    - *'react-lottie-player' → "@lottiefiles/react-lottie-player"; 오류수정*
+    
+    ```jsx
+    'use client'
+    import React from 'react'
+    // import Lottie from 'react-lottie-player'
+    import { Player } from "@lottiefiles/react-lottie-player";
+    // Alternatively:
+    
+    // import Lottie from 'react-lottie-player/dist/LottiePlayerLight'
+    import lottieJson from '@/public/animation.json';
+    
+    export default function Animation() {
+      return (
+        <Player
+          loop
+          src={lottieJson}
+          autoplay 
+        />
+      )
+    }
+    ```
+    
+- Notion api integration 적용
+- Next.js 데이터 페칭
+    - 외부함수 export 문제 해결
+- Vercel 를 통한 배포
+- postman 노션 데이터 처리 확인
+- 외부 이미지 허용처리
+    - next.config.js
+    
+    ```jsx
+    /** @type {import('next').NextConfig} */
+    const nextConfig = {
+        reactStrictMode: true,
+        images: {
+            domains: [
+                'www.notion.so',
+                'images.unsplash.com',
+                's3.us-west-2.amazonaws.com'
+            ],
+            format: ['image/png', 'image/webp', 'image/jpeg']
+        }
+      }
+      
+      module.exports = nextConfig
+    ```
