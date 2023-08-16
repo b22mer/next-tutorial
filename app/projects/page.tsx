@@ -11,23 +11,23 @@ export default function Project() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold sm:text-6xl">
+      {/* <h1 className="text-4xl font-bold sm:text-6xl">
         총 프로젝트 :
         <span className="pl-4 text-blue-500">{projects.results.length}</span>
-      </h1>
+      </h1> */}
       <div className="grid grid-cols-1 gap-8 p-12 m-4 md:grid-cols-2">
-                    {projects.results.map((aProject:any) => {
-                      const temp ={...aProject.properties,cover:aProject.cover};
-                      return <ProjectItem key={aProject.id} data={temp}/>
-                    }
-                        
-                    )}
-                </div>
+        {projects.results.map((aProject: any) => {
+          const temp = { ...aProject.properties, cover: aProject.cover };
+          return <ProjectItem key={aProject.id} data={temp} />
+        }
+
+        )}
+      </div>
     </>
   )
 }
 
-export async function fetchData() {
+async function fetchData() {
   const options = {
     method: 'POST',
     headers: {
