@@ -59,8 +59,7 @@ export default function ProjectItem({ data }: { data: projects }) {
                 className="rounded-t-xl"
                 src={imgSrc}
                 alt="cover image"
-                width="100%" // 원하는 너비 값 (픽셀)
-                height="50%"// 원하는 높이 값 (픽셀)
+
                 layout="responsive"
                 objectFit="cover"
                 quality={100}
