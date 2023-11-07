@@ -130,4 +130,4 @@ p {
       module.exports = nextConfig
     ```
 
-    ## [Project URL](https://next-portfolio-sage-zeta.vercel.app/)
+    ## [Test URL](https://next-portfolio-sage-zeta.vercel.app/)
